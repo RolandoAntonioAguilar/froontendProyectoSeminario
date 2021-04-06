@@ -34,13 +34,22 @@ export class AuthService {
   }
 
   sendEmail(email: string): Observable<any> {
-    return this.http.post<any>(`${this.endpoint}/user/send_mail`, email);
+    return this.http.post<any>(`${this.endpoint}/user/send_mail`, {
+      email,
+    });
   }
-  
-  resetPassword(password: string): Observable<any> {
+
+  resetPassword(token: string, password: string): Observable<any> {
     return this.http.post<any>(
-      `${this.endpoint}/user/reset_password/${this.getToken()}`,
-      password
+      `${this.endpoint}/user/restore_password/${token}`,
+      { password }
+    );
+  }
+
+  verifyToken(token: string) {
+    return this.http.post<any>(
+      `${this.endpoint}/user/verified_token/${token}`,
+      {}
     );
   }
 }

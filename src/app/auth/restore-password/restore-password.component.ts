@@ -31,6 +31,7 @@ export class RestorePasswordComponent implements OnInit {
   }
 
   public onSubmit(thisForm: User) {
+    
     this.authService.sendEmail(thisForm.email).subscribe(
       (res) => {
         this.alertService.success(
