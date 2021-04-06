@@ -13,6 +13,7 @@ export class TokenInterceptorService {
         Authorization: `Bearer ${this.authService.getToken()}`,
       },
     });
+    
 
     return next.handle(tokenReq);
   }

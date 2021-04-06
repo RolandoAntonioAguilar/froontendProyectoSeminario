@@ -1,0 +1,51 @@
+<div>
+    <form novalidate [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
+        <h1 class="text-center">Tarea</h1>
+        <div class="mb-3">
+            <label for="inputTitle" class="form-label">Titulo</label>
+            <input type="text" class="form-control" formControlName="title" id="inputTitle" [readonly]="!edit">
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="taskForm.get('title').hasError('required') && taskForm.get('title').touched">El campo es
+                    requerido</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="inputDescription" class="form-label">Descripción</label>
+            <textarea class="form-control" formControlName="description" id="inputDescription" cols="30" rows="5"
+                [readonly]="!edit"></textarea>
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="taskForm.get('description').hasError('required') && taskForm.get('description').touched">El
+                    campo
+                    es
+                    requerido</span>
+
+            </div>
+        </div>
+        <div class="mb-3">
+            <span class="h4">Estado: {{state}}</span>
+        </div>
+        <ng-container *ngIf="!edit; else editTemplate">
+            <a class="btn btn-success p-2 fs-5" (click)="activateEdit()">Editar</a>
+
+        </ng-container>
+        <ng-template #editTemplate>
+            <button type="submit" class="btn btn-primary p-2 fs-5" [disabled]="taskForm.invalid">Guardar</button>
+
+        </ng-template>
+        <a class="btn btn-danger ms-3 p-2 fs-5" (click)="deleteTask()">Eliminar</a>
+
+
+
+
+    </form>
+    <hr>
+    <div class="text-center row">
+        <a class="h5 me-4" href="tasks">
+            Volver
+        </a>
+
+    </div>
+
+</div>

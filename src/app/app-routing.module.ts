@@ -6,7 +6,9 @@ import { RestorePasswordTokenComponent } from './auth/restore-password-token/res
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { AddTaskComponent } from './tasks/add-task/add-task.component';
 import { TasksComponent } from './tasks/tasks/tasks.component';
+import { ViewTaskComponent } from './tasks/view-task/view-task.component';
 
 
 const routes: Routes = [
@@ -38,6 +40,16 @@ const routes: Routes = [
   {
     path: 'tasks',
     component: TasksComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'task/add',
+    component: AddTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'task/view/:_id',
+    component: ViewTaskComponent,
     canActivate: [AuthGuard],
   },
 ];

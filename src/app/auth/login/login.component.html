@@ -4,15 +4,31 @@
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Correo electrónico</label>
             <input type="email" class="form-control" formControlName="email" id="inputEmail">
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">El campo es
+                    requerido</span>
+                <span class="text-danger row"
+                    *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched">El correo
+                    electrónico no es valido</span>
+
+            </div>
         </div>
         <div class="mb-3">
             <label for="inputPassword" class="form-label">Contraseña</label>
             <input type="password" class="form-control" formControlName="password" id="inputPassword">
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">El campo
+                    es
+                    requerido</span>
+
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar sesión</button>
     </form>
     <hr>
-    <div class="text-center">
+    <div class="text-center row">
         <a class="h5 me-4" href="register">
             Registrarse
         </a>
@@ -20,7 +36,6 @@
             Recuperar contraseña
         </a>
     </div>
-   
-</div>
 
+</div>
 <ff-alerts></ff-alerts>

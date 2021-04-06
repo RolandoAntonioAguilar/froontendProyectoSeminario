@@ -4,16 +4,42 @@
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Correo electrónico</label>
             <input type="email" class="form-control" formControlName="email" id="inputEmail">
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">El campo
+                    es
+                    requerido</span>
+                <span class="text-danger row"
+                    *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">El correo
+                    electrónico no es valido</span>
+
+            </div>
         </div>
         <div class="mb-3">
             <label for="inputPassword" class="form-label">Contraseña</label>
             <input type="password" class="form-control" formControlName="password" id="inputPassword">
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">El
+                    campo
+                    es
+                    requerido</span>
+
+            </div>
         </div>
         <div class="mb-3">
             <label for="inputPassword2" class="form-label">Repetir contraseña</label>
             <input type="password" class="form-control" formControlName="repeatPassword" id="inputPassword2">
+            <div class="ms-2">
+                <span class="text-danger row"
+                    *ngIf="registerForm.get('repeatPassword').hasError('required') && registerForm.get('repeatPassword').touched">El
+                    campo
+                    es
+                    requerido</span>
+
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Registrarse</button>
+        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse</button>
     </form>
     <hr>
     <div class="text-center">

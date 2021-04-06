@@ -57,25 +57,30 @@ export class RestorePasswordTokenComponent implements OnInit {
   }
 
   public onSubmit(thisForm: User) {
-    if (thisForm.password != thisForm.repeatPassword) {
+    if (
+      thisForm.password != thisForm.repeatPassword &&
+      thisForm.password.length > 0
+    ) {
       this.alertService.danger(`Las contraseñas deben ser iguales`);
     } else {
-      this.authService.resetPassword(this.reqToken,thisForm.password).subscribe(
-        (res) => {
-          this.alertService.success(`${res.message}`);
+      this.authService
+        .resetPassword(this.reqToken, thisForm.password)
+        .subscribe(
+          (res) => {
+            this.alertService.success(`${res.message}`);
 
-          this.router.navigate(['/login']);
-        },
-        (err) => {
-          let message = err.error.message || err.statusText;
-          console.error(message);
-          if (message == 'Unknown Error') {
-            message = 'Error desconocido';
+            this.router.navigate(['/login']);
+          },
+          (err) => {
+            let message = err.error.message || err.statusText;
+            console.error(message);
+            if (message == 'Unknown Error') {
+              message = 'Error desconocido';
+            }
+
+            this.alertService.danger(`${message}`);
           }
-
-          this.alertService.danger(`${message}`);
-        }
-      );
+        );
     }
   }
 }

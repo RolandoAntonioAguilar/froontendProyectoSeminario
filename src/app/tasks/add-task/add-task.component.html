@@ -1,0 +1,34 @@
+<div>
+  <form novalidate [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
+    <h1 class="text-center">Agregar tarea</h1>
+    <div class="mb-3">
+      <label for="inputTitle" class="form-label">Titulo</label>
+      <input type="text" class="form-control" formControlName="title" id="inputTitle">
+      <div class="ms-2">
+        <span class="text-danger row"
+          *ngIf="taskForm.get('title').hasError('required') && taskForm.get('title').touched">El campo es
+          requerido</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="inputDescription" class="form-label">Descripción</label>
+      <textarea class="form-control" formControlName="description" id="inputDescription"cols="30" rows="5"></textarea>
+      <div class="ms-2">
+        <span class="text-danger row"
+          *ngIf="taskForm.get('description').hasError('required') && taskForm.get('description').touched">El campo
+          es
+          requerido</span>
+
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Guardar</button>
+  </form>
+  <hr>
+  <div class="text-center row">
+    <a class="h5 me-4" href="tasks">
+      Volver
+    </a>
+
+  </div>
+
+</div>
